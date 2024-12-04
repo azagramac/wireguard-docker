@@ -64,14 +64,35 @@
     Docker Compose version v2.29.7
 
 ### Clone repo
-    git clone https://github.com/AzagraMac/wireguard-docker.git
+    git clone https://github.com/azagramac/wireguard-docker.git
     cd wireguard-docker
 
 ### Running
     docker compose up -d
 
+### Output
+    $ docker compose up -d
+    [+] Running 9/9
+     ✔ wireguard Pulled                                                                                                                                                                                                                             23.2s 
+       ✔ 646ff129efa7 Pull complete                                                                                                                                                                                                                  4.5s 
+       ✔ df25a931801a Pull complete                                                                                                                                                                                                                  5.2s 
+       ✔ c116abe7e7b3 Pull complete                                                                                                                                                                                                                  5.7s 
+       ✔ ec142417d43e Pull complete                                                                                                                                                                                                                  5.9s 
+       ✔ ef02aa7fa9ff Pull complete                                                                                                                                                                                                                 10.6s 
+       ✔ 9ae179c60632 Pull complete                                                                                                                                                                                                                 10.9s 
+       ✔ 0203081f93d0 Pull complete                                                                                                                                                                                                                 21.8s 
+       ✔ 9b56ac8a03b4 Pull complete                                                                                                                                                                                                                 22.0s 
+    [+] Running 2/2
+     ✔ Network wireguard_default  Created                                                                                                                                                                                                            0.4s 
+     ✔ Container wireguard        Started
+
 ### Check
     docker ps -a
+
+### Output
+    $ docker ps -a
+    CONTAINER ID   IMAGE                                          COMMAND                  CREATED         STATUS                  PORTS                      NAMES
+    eb8849811b3f   ghcr.io/linuxserver/wireguard:arm64v8-latest   "/init"                  2 minutes ago   Up About a minute       0.0.0.0:51820->51820/udp   wireguard
 
 ### Show QR config client 1, change number for show config client 2, 3... 
     docker exec -it wireguard /app/show-peer 1
