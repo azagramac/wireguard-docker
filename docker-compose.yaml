@@ -1,8 +1,8 @@
 ---
-version: "2.1"
+version: "3.9"
 services:
   wireguard:
-    image: ghcr.io/linuxserver/wireguard:arm64v8-latest
+    image: ghcr.io/linuxserver/wireguard:latest
     container_name: wireguard
     cap_add:
       - NET_ADMIN
@@ -15,11 +15,11 @@ services:
       - PEERS=3
       - PEERDNS=1.1.1.1,1.0.0.1
       - SERVERURL=MY_DOMAIN_DDNS
-      - INTERNAL_SUBNET=10.5.1.0/24
+      - INTERNAL_SUBNET=10.1.1.0/30
       - ALLOWEDIPS=0.0.0.0/0
     volumes:
-      - $HOME/docker/wireguard/config:/config
-      - /lib/modules:/lib/modules
+      - /root/docker/wireguard/config:/config
+      - /lib/modules:/lib/modules:ro
     ports:
       - 51820:51820/udp
     sysctls:
@@ -31,4 +31,3 @@ services:
           memory: 256M
         reservations:
           memory: 128M
-
