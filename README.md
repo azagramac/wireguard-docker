@@ -19,48 +19,53 @@
 | armhf | ❌ | |
 | armv7 | ❌ | |
 
-### Install Docker (Ubuntu, Debian...)
-    sudo apt update && sudo apt upgrade -y
-    sudo apt install git vim wget curl net-tools ca-certificates gnupg
-    curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-    echo  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
-	"$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+### Install Docker (Ubuntu, Debian, Armbian, DietPi...)
+    sudo apt update && sudo apt install git vim wget curl net-tools ca-certificates gnupg -y
+    sudo install -m 0755 -d /etc/apt/keyrings
+    sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+    sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+    echo \
+    	"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+     	$(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+      	sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+       
     sudo apt update
     sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
     sudo usermod -aG docker $USER
-    sudo apt install docker-compose-plugin -y
+    sudo reboot
 
 ### Test Docker
-    $ docker version
-	Client: Docker Engine - Community
-	 Version:           27.3.1
-	 API version:       1.47
-	 Go version:        go1.22.7
-	 Git commit:        ce12230
-	 Built:             Fri Sep 20 11:41:19 2024
-	 OS/Arch:           linux/arm64
-	 Context:           default
-	
-	Server: Docker Engine - Community
-	 Engine:
-	  Version:          27.3.1
-	  API version:      1.47 (minimum version 1.24)
-	  Go version:       go1.22.7
-	  Git commit:       41ca978
-	  Built:            Fri Sep 20 11:41:19 2024
-	  OS/Arch:          linux/arm64
-	  Experimental:     false
-	 containerd:
-	  Version:          1.7.23
-	  GitCommit:        57f17b0a6295a39009d861b89e3b3b87b005ca27
-	 runc:
-	  Version:          1.1.14
-	  GitCommit:        v1.1.14-0-g2c9f560
-	 docker-init:
-	  Version:          0.19.0
-	  GitCommit:        de40ad0
-
-    $ docker compose version
+    root@nanopi-neo3:~$ docker version
+    Client: Docker Engine - Community
+     Version:           27.3.1
+     API version:       1.47
+     Go version:        go1.22.7
+     Git commit:        ce12230
+     Built:             Fri Sep 20 11:41:19 2024
+     OS/Arch:           linux/arm64
+     Context:           default
+    
+    Server: Docker Engine - Community
+     Engine:
+      Version:          27.3.1
+      API version:      1.47 (minimum version 1.24)
+      Go version:       go1.22.7
+      Git commit:       41ca978
+      Built:            Fri Sep 20 11:41:19 2024
+      OS/Arch:          linux/arm64
+      Experimental:     false
+     containerd:
+      Version:          1.7.24
+      GitCommit:        88bf19b2105c8b17560993bee28a01ddc2f97182
+     runc:
+      Version:          1.2.2
+      GitCommit:        v1.2.2-0-g7cb3632
+     docker-init:
+      Version:          0.19.0
+      GitCommit:        de40ad0
+      
+    root@nanopi-neo3:~$ docker compose version
     Docker Compose version v2.29.7
 
 ### Clone repo
