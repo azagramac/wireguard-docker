@@ -98,6 +98,19 @@
     CONTAINER ID   IMAGE                                          COMMAND                  CREATED         STATUS                  PORTS                      NAMES
     eb8849811b3f   ghcr.io/linuxserver/wireguard:arm64v8-latest   "/init"                  2 minutes ago   Up About a minute       0.0.0.0:51820->51820/udp   wireguard
 
+### Running on docker swarm 🐳
+    cd wireguard-docker
+    docker stack deploy --compose-file compose.yml wireguard
+
+### Check on docker swarm 🐳
+     $ docker service ls
+     ID             NAME                   MODE         REPLICAS   IMAGE                                  PORTS                 
+     dmbht3wp5asz   wireguard_vpn          replicated   1/1        ghcr.io/linuxserver/wireguard:latest   *:51820->51820/udp
+     
+     $ docker service ps wireguard_vpn
+     ID             NAME              IMAGE                                  NODE      DESIRED STATE   CURRENT STATE               ERROR     PORTS
+     t1gsvql9cage   wireguard_vpn.1   ghcr.io/linuxserver/wireguard:latest   master    Running         Running 44 hours ago
+
 ### Show QR config client 1, change number for show config client 2, 3... 
     docker exec -it wireguard /app/show-peer 1
 
