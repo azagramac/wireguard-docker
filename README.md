@@ -1,7 +1,7 @@
 [![GitHub Release](https://img.shields.io/github/release/linuxserver/docker-wireguard.svg?color=88171a&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=wireguard)](https://github.com/linuxserver/docker-wireguard/releases)
 
 <p align="center">
-  <img src="https://github.com/AzagraMac/wireguard-docker/assets/571796/d0c3ac2a-1c2d-46a1-bc4d-648d0cafa3a2" width="400" title="logo_wg">
+  <img src="https://github.com/user-attachments/assets/89e3cd43-a07c-40a7-9263-9a3798e20e8e" width="450" title="logo_wg">
 </p>
 
 ### Requeriments
@@ -106,3 +106,7 @@
 
 ### Download App
 <a href="https://play.google.com/store/apps/details?id=com.wireguard.android"><img src="https://lh3.googleusercontent.com/q1k2l5CwMV31JdDXcpN4Ey7O43PxnjAuZBTmcHEwQxVuv_2wCE2gAAQMWxwNUC2FYEOnYgFPOpw6kmHJWuEGeIBLTj9CuxcOEeU8UXyzWJq4NJM3lg=s0" width="130px"></a>  <a href="https://apps.apple.com/es/app/wireguard/id1441195209"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/640px-Download_on_the_App_Store_Badge.svg.png" width="130px"></a>
+
+<p align="center">
+  <img src="https://github.githubassets.com/assets/mona-loading-default-c3c7aad1282f.gif" width="40" title="git">
+</p>
