@@ -1,0 +1,41 @@
+---
+services:
+  vpn:
+    image: ghcr.io/linuxserver/wireguard:latest
+    restart: always
+    deploy:
+      replicas: 1
+      placement: 
+        constraints: 
+          - node.role == manager
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 64M
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Madrid
+      - SERVERPORT=51820
+      - PEERS=3 # Number clients
+      - PEERDNS=1.1.1.1,1.0.0.1
+      - SERVERURL=YOUR_DOMAIN_DDNS
+      - INTERNAL_SUBNET=10.10.1.0/30
+      - ALLOWEDIPS=192.168.1.0/24
+      - LOG_CONFS=true
+    volumes:
+      - /home/$USER/docker/wireguard:/config:rw
+      - /lib/modules:/lib/modules:ro
+      - /etc/hosts:/etc/hosts:ro
+    ports:
+      - 51820:51820/udp
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+      - net.ipv4.ip_forward=1
+      - net.ipv4.conf.all.proxy_arp=1
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
