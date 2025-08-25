@@ -1,4 +1,4 @@
-name: 🐳 Docker WireGuard - Build & Push Multi-Arch
+name: 🐳 Docker WireGuard
 
 on:
   push:
@@ -21,7 +21,11 @@ jobs:
 
       - name: 📌 Extract version from Dockerfile
         run: |
-          VERSION=$(grep -i 'LABEL version' Dockerfile | cut -d'"' -f2)
+          VERSION=$(grep -i 'LABEL version' Dockerfile | cut -d'"' -f2 || true)
+          if [ -z "$VERSION" ]; then
+            echo "❌ No se pudo detectar la versión en el Dockerfile"
+            exit 1
+          fi
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "📝 Detected Docker version: $VERSION"
 
@@ -39,8 +43,13 @@ jobs:
             --tag ${{ secrets.DOCKERHUB_USERNAME }}/wireguard:latest \
             --tag ${{ secrets.DOCKERHUB_USERNAME }}/wireguard:$VERSION \
             --push \
+            --cache-from=type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/wireguard:buildcache \
+            --cache-to=type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/wireguard:buildcache,mode=max \
             .
           echo "🚀 Multi-arch WireGuard images pushed: latest and $VERSION"
+
+      - name: 📦 Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y jq
 
       - name: 🎉 Verify Docker Hub tags
         shell: bash
