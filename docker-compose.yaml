@@ -1,7 +1,7 @@
 ---
 services:
   wireguard:
-    image: ghcr.io/linuxserver/wireguard:latest
+    image: azagramac/wireguard:latest
     container_name: wireguard
     restart: always
     deploy:
@@ -18,9 +18,9 @@ services:
       - PEERS=3
       - PEERDNS=1.1.1.1,1.0.0.1
       - PERSISTENTKEEPALIVE_PEERS=all
-      - SERVERURL=YOUR_DOMAIN_DDNS
-      - INTERNAL_SUBNET=10.10.1.0/24
-      - ALLOWEDIPS=192.168.1.0/24
+      - SERVERURL=YOUR_DOMAIN_DDNS      # Change YOUR_DOMAIN_DDNS
+      - INTERNAL_SUBNET=10.10.1.0/24    # Change IP
+      - ALLOWEDIPS=192.168.1.0/24       # Change IP
       - LOG_CONFS=true
     volumes:
       - /home/$USER/docker/wireguard:/config:rw
